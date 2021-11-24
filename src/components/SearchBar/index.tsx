@@ -7,9 +7,13 @@ import searchIcon from '../../images/search-icon.svg';
 //Styles
 import { Wrapper, Content } from "./SearchBar.styles";
 
+//Types
+type Props = {
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>; // it's a callback
+}
 
 // Controlled react component
-const SearchBar = ({ setSearchTerm }) => {
+const SearchBar: React.FC<Props> = ({ setSearchTerm }) => {  // implicitly type of setSearchTerm is any, but we can extract its type from Home component
 
     const [state, setState] = useState('');
 
@@ -50,11 +54,6 @@ const SearchBar = ({ setSearchTerm }) => {
             </Content>
         </Wrapper>
     )
-}
-
-SearchBar.propTypes = {
-    setSearchTerm: PropTypes.func,
-    callback: PropTypes.func,
 }
 
 export default SearchBar;
