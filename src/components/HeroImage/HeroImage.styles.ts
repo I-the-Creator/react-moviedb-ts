@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
+//Types
+type Props = {
+    image: string; // it's an URL
+}
 
-export const Wrapper = styled.div `
+
+export const Wrapper = styled.div<Props> `
     background: linear-gradient(
         to bottom, rgba(0, 0, 0, 0)
         41%, rgba(0, 0, 0, 0.65)
@@ -58,6 +63,4 @@ export const Text = styled.div `
     @media screen and (max-width: 720px) {
             max-width: 100%;
         }
-
-
 `;
