@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import API from '../API';  // import functions for fetching
+import API, { Movie, Cast, Crew } from '../API';  // import functions for fetching
 
 //Helpers
 import { isPersistedState } from "../helpers";
+//Types
+export type MovieState = Movie & { actors: Cast[], directors: Crew[]};
 
-export const useMovieFetch = movieId => {
+export const useMovieFetch = (movieId: number) => {
 
-    const [state, setState] = useState({});  // empty object by default
+    const [state, setState] = useState<MovieState>({} as MovieState);  // empty object by default
     const [loading, setLoading] = useState(true);  // as that component fetching data for the dedicated movie
     const [error, setError] = useState(false);   // error state
 
@@ -28,7 +30,7 @@ export const useMovieFetch = movieId => {
                     member => member.job === 'Director'
                 );
 
-                // state setter without checing for previous value
+                // state setter without checking for previous value
                 setState({
                     ...movie,  // destructure 'movie' object
                     actors: credits.cast,
@@ -44,7 +46,7 @@ export const useMovieFetch = movieId => {
 
 
         // check the data stored in session storage and get ot
-        const sessionState = isPersistedState(movieId);
+        const sessionState = isPersistedState(movieId.toString());
         if(sessionState) {
             setState(sessionState);
             setLoading(false); // do not show spinner if have data in session storage
@@ -57,7 +59,7 @@ export const useMovieFetch = movieId => {
     //Write to session storage
     useEffect(() => {
         // each movie will be stored to the sessionStorage with its ID
-        sessionStorage.setItem(movieId, JSON.stringify(state));
+        sessionStorage.setItem(movieId.toString(), JSON.stringify(state));
     }, [movieId, state]);
 
     return { state, loading, error};
