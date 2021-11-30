@@ -8,7 +8,7 @@ import { Image } from './Thumb.styles';
 //Types
 type Props = {
     image: string; // it's an URL
-    movieId: number;
+    movieId?: number;
     clickable: boolean;
 }
 
