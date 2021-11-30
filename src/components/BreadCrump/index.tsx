@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 
 //Routing
 import { Link } from 'react-router-dom';
@@ -7,8 +7,13 @@ import { Link } from 'react-router-dom';
 //Styles
 import { Wrapper, Content } from './BreadCrump.styles';
 
+//types
+type Props = {
+    movieTitle: string;
+}
+
 // create component and destructure prop
-const BreadCrump = ({ movieTitle }) => (
+const BreadCrump: React.FC<Props>= ({ movieTitle }) => (
     <Wrapper>
         <Content>
             <Link to='/'>
@@ -19,9 +24,5 @@ const BreadCrump = ({ movieTitle }) => (
         </Content>
     </Wrapper>
 );
-
-BreadCrump.propTypes = {
-    movieTitle: PropTypes.string
-}
 
 export default BreadCrump;
