@@ -17,14 +17,14 @@ import { useMovieFetch } from '../hooks/useMovieFetch';
 //Image
 import NoImage from '../images/no_image.jpg';
 
-const Movie = () => {
+const Movie: React.FC = () => {
 
     // destructure props from useParam to get movieId from URL
     //  name param as 'movieId' as we named it like this in App.js in Routes
     const { movieId } = useParams();   
 
     //destructure props exported from the hook
-    const { state: movie, loading, error } = useMovieFetch(movieId);
+    const { state: movie, loading, error } = useMovieFetch(Number(movieId));
 
     // console.log(movie);  // json object 
 
